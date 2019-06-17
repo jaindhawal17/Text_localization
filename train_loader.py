@@ -7,7 +7,7 @@ import random
 import torchvision.transforms as transforms
 import torch
 import pyclipper
-import Polygon2 as plg
+import Polygon as plg
 
 ic15_root_dir = '/content/drive/My Drive/datasets/ICDAR/Datasets'
 ic15_train_data_dir = ic15_root_dir + 'ch4_training_images/'
