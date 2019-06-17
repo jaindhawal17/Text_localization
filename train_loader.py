@@ -16,24 +16,24 @@ ic15_test_data_dir = ic15_root_dir + 'ch4_test_images/'
 ic15_test_gt_dir = ic15_root_dir + 'ch4_test_localization_transcription_gt/'
 
 random.seed(123456)
-
+img_path = ic15_train_data_dir
 def get_img(img_path):
     try:
         img = cv2.imread(img_path)
         img = img[:, :, [2, 1, 0]]
     except Exception as e:
-        print img_path
+        print (img_path)
         raise
     return img
 
 def get_bboxes(img, gt_path):
     h, w = img.shape[0:2]
-    lines = util.io.read_lines(gt_path)
+    lines = utils.io.read_lines(gt_path)
     bboxes = []
     tags = []
     for line in lines:
-        line = util.str.remove_all(line, '\xef\xbb\xbf')
-        gt = util.str.split(line, ',')
+        line = utils.str.remove_all(line, '\xef\xbb\xbf')
+        gt = utils.str.split(line, ',')
         if gt[-1][0] == '#':
             tags.append(False)
         else:
@@ -157,8 +157,8 @@ class IC15Loader(data.Dataset):
         self.gt_paths = []
 
         for data_dir, gt_dir in zip(data_dirs, gt_dirs):
-            img_names = util.io.ls(data_dir, '.jpg')
-            img_names.extend(util.io.ls(data_dir, '.png'))
+            img_names = utils.io.ls(data_dir, '.jpg')
+            img_names.extend(utils.io.ls(data_dir, '.png'))
             # img_names.extend(util.io.ls(data_dir, '.gif'))
 
             img_paths = []
